@@ -7,9 +7,11 @@ import axios from 'axios';
 export default function App() {
   const [people, setPeople] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [maleCount, setMaleCount] = useState(0);
-  const [femaleCount, setFemaleCount] = useState(0);
-  const [droidCount, setDroidCount] = useState(0);
+  const [favorite, setFavorite] = useState([]);
+
+  const femaleCount = favorite.filter(el => el.gender === 'female').length;
+  const maleCount = favorite.filter(el => el.gender === 'male').length;
+  const droidCount = favorite.filter(el => el.gender === 'n/a').length;
 
   useEffect(() => {
     axios.get(`https://swapi.dev/api/people/?page=${currentPage}`)
@@ -29,9 +31,7 @@ export default function App() {
     setCurrentPage(currentPage + 1);
   };
 
-  console.log(people.length);
-
-  return (
+  return ( 
     <ScrollView style={styles.container}>
       <View style={styles.tasksWrapper}>
         <Text style={styles.sectionTitle}>Fans</Text>
@@ -52,9 +52,7 @@ export default function App() {
         <TouchableOpacity 
           style={styles.resetButton}
           onPress={() => {
-            setMaleCount(0);
-            setFemaleCount(0);
-            setDroidCount(0);
+            setFavorite([]);
           }}
         >
           <Text style={styles.resetText}>Clear Fans</Text>
@@ -69,6 +67,8 @@ export default function App() {
               maleFunc={(newCount) => setMaleCount(newCount)}
               femaleFunc={(newCount) => setFemaleCount(newCount)}
               droidFunc={(newCount) => setDroidCount(newCount)}
+              favorite={favorite}
+              setFavorite={setFavorite}
             />
           ))}
         </View>

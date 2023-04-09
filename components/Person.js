@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, ImageBackground} from "react-native";
 import axios from 'axios';
 
-const Person = ({ person, maleFunc, femaleFunc, droidFunc }) => {
-  const [like, setLike] = useState(true);
+const Person = ({ person, favorite, setFavorite }) => {
   const [expanded, setExpanded] = useState(false);
   const [home, setHome] = useState({});
+
+  const conditionButton = !favorite.includes(person);
 
   const toggleExpanded = () => {
     setExpanded(!expanded);
@@ -21,27 +22,17 @@ const Person = ({ person, maleFunc, femaleFunc, droidFunc }) => {
       });
   }, []);
 
-  const handleCountUpdate = (gender) => {
-    if (gender === 'male') {
-      if (like) {
-        maleFunc(prevCount => prevCount + 1)
-      } else {
-        maleFunc(prevCount => prevCount - 1)
-      }
-    } else if (gender === 'female') {
-      if (like) {
-        femaleFunc(prevCount => prevCount + 1)
-      } else {
-        femaleFunc(prevCount => prevCount - 1)
-      }
-    } else if (gender === 'n/a') {
-      if (like) {
-        droidFunc(prevCount => prevCount + 1)
-      } else {
-        droidFunc(prevCount => prevCount - 1)
-      }
+  const handleFavorite = (one) => {
+    if (!favorite.includes(one)) {
+      setFavorite([...favorite, one])
     }
-  };
+
+    if (favorite.includes(one)) {
+      setFavorite(favorite.filter(el => el.name !== one.name))
+    }
+  }
+
+  // console.log(favorite)
 
   return (
     <TouchableOpacity onPress={toggleExpanded}>
@@ -50,11 +41,10 @@ const Person = ({ person, maleFunc, femaleFunc, droidFunc }) => {
           <TouchableOpacity 
             style={styles.square}
             onPress={() => {
-              handleCountUpdate(person.gender)
-              setLike(!like)
+              handleFavorite(person)
             }}
           >
-            {like ? (
+            {conditionButton ? (
               <ImageBackground
                 style={{width: '100%', height: '100%'}}
                 source={require('../assets/empty.png')}
