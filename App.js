@@ -34,8 +34,8 @@ export default function App() {
   return ( 
     <ScrollView style={styles.container}>
       <View style={styles.tasksWrapper}>
-        <Text style={styles.sectionTitle}>Fans</Text>
-        <View style={styles.sectionCounters}>
+        <Text style={styles.tasksTitle}>Fans</Text>
+        <View style={styles.countersWeapper}>
           <View style={styles.sectionCounter}>
             <Text style={styles.counter}>{femaleCount}</Text>
             <Text style={styles.counterName}>Female Fans</Text>
@@ -64,9 +64,6 @@ export default function App() {
             <Person 
               key={person.created} 
               person={person}
-              maleFunc={(newCount) => setMaleCount(newCount)}
-              femaleFunc={(newCount) => setFemaleCount(newCount)}
-              droidFunc={(newCount) => setDroidCount(newCount)}
               favorite={favorite}
               setFavorite={setFavorite}
             />
@@ -75,13 +72,11 @@ export default function App() {
         <View style={styles.buttonWrapper}>
           <Button 
             title="Prev"
-            style={styles.button}
             disabled={currentPage === 1} 
             onPress={handlePrevPage} 
           />
           <Button 
             title="Next"
-            style={styles.button}
             disabled={currentPage === 9}
             onPress={handleNextPage}
           />
@@ -100,11 +95,11 @@ const styles = StyleSheet.create({
     paddingTop: 60,
     paddingHorizontal: 20,
   },
-  sectionTitle: {
+  tasksTitle: {
     fontSize: 24,
     fontWeight: 'bold',
   },
-  sectionCounters: {
+  countersWeapper: {
     flexDirection: 'row',
     marginTop: 10,
   },
@@ -142,7 +137,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     marginBottom: 20,
-  },
-  button: {
   },
 });

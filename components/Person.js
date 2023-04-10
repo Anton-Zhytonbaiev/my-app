@@ -37,9 +37,9 @@ const Person = ({ person, favorite, setFavorite }) => {
   return (
     <TouchableOpacity onPress={toggleExpanded}>
       <View style={styles.item}>
-        <View style={styles.itemLeft}>
+        <View style={styles.mainInform}>
           <TouchableOpacity 
-            style={styles.square}
+            style={styles.favoriteButton}
             onPress={() => {
               handleFavorite(person)
             }}
@@ -82,11 +82,11 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     justifyContent: 'space-between',
   },
-  itemLeft: {
+  mainInform: {
     flexDirection: 'row',
     alignItems: 'center',
   },
-  square: {
+  favoriteButton: {
     width: 24,
     height: 24,
     marginRight: 15,
