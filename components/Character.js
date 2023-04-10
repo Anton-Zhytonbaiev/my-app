@@ -1,12 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, ImageBackground} from "react-native";
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
 import axios from 'axios';
 
-const Person = ({ person, favorite, setFavorite }) => {
+const Character = ({ person, favorite, setFavorite }) => {
   const [expanded, setExpanded] = useState(false);
   const [home, setHome] = useState({});
-
-  const conditionButton = !favorite.includes(person);
 
   const toggleExpanded = () => {
     setExpanded(!expanded);
@@ -32,8 +30,6 @@ const Person = ({ person, favorite, setFavorite }) => {
     }
   }
 
-  // console.log(favorite)
-
   return (
     <TouchableOpacity onPress={toggleExpanded}>
       <View style={styles.item}>
@@ -44,16 +40,16 @@ const Person = ({ person, favorite, setFavorite }) => {
               handleFavorite(person)
             }}
           >
-            {conditionButton ? (
+            {favorite.includes(person) ? (
               <ImageBackground
                 style={{width: '100%', height: '100%'}}
-                source={require('../assets/empty.png')}
+                source={require('../assets/full.png')}
               >
               </ImageBackground>
             ) : (
               <ImageBackground
                 style={{width: '100%', height: '100%'}}
-                source={require('../assets/full.png')}
+                source={require('../assets/empty.png')}
               >
               </ImageBackground>
             )}
@@ -69,8 +65,8 @@ const Person = ({ person, favorite, setFavorite }) => {
         )}
       </View> 
     </TouchableOpacity>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   item: {
@@ -96,4 +92,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Person;
+export default Character;
