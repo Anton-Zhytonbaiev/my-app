@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, Button, TouchableOpacity } from 'react-native';
-import Person from './components/Person';
+import Character from './components/Character';
+import Counters from './components/Counters';
 import axios from 'axios';
 
 
@@ -31,24 +32,16 @@ export default function App() {
     setCurrentPage(currentPage + 1);
   };
 
+
   return ( 
     <ScrollView style={styles.container}>
       <View style={styles.tasksWrapper}>
         <Text style={styles.tasksTitle}>Fans</Text>
-        <View style={styles.countersWeapper}>
-          <View style={styles.sectionCounter}>
-            <Text style={styles.counter}>{femaleCount}</Text>
-            <Text style={styles.counterName}>Female Fans</Text>
-          </View>
-          <View style={styles.sectionCounter}>
-            <Text style={styles.counter}>{maleCount}</Text>
-            <Text style={styles.counterName}>Male Fans</Text>
-          </View>
-          <View style={styles.sectionCounter}>
-            <Text style={styles.counter}>{droidCount}</Text>
-            <Text style={styles.counterName}>Others</Text>
-          </View>
-        </View>
+        <Counters 
+          femaleCount={femaleCount}
+          maleCount={maleCount}
+          droidCount={droidCount}
+        />
         <TouchableOpacity 
           style={styles.resetButton}
           onPress={() => {
@@ -61,7 +54,7 @@ export default function App() {
 
         <View style={styles.items}>
           {people.map(person => (
-            <Person 
+            <Character
               key={person.created} 
               person={person}
               favorite={favorite}
