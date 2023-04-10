@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 
 const Counters = ({ femaleCount, maleCount, droidCount }) => {
   return (
-    <View style={styles.countersWeapper}>
+    <View style={styles.countersContainer}>
       <View style={styles.sectionCounter}>
         <Text style={styles.counter}>{femaleCount}</Text>
         <Text style={styles.counterName}>Female Fans</Text>
@@ -21,7 +21,7 @@ const Counters = ({ femaleCount, maleCount, droidCount }) => {
 };
 
 const styles = StyleSheet.create({
-  countersWeapper: {
+  countersContainer: {
     flexDirection: 'row',
     marginTop: 10,
   },

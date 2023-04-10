@@ -62,7 +62,7 @@ export default function App() {
             />
           ))}
         </View>
-        <View style={styles.buttonWrapper}>
+        <View style={styles.buttonConteiner}>
           <Button 
             title="Prev"
             disabled={currentPage === 1} 
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
   items: {
     marginTop: 15,
   },
-  buttonWrapper: {
+  buttonConteiner: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
     marginBottom: 20,
